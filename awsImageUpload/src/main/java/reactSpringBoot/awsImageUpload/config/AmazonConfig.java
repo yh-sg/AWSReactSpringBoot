@@ -1,5 +1,6 @@
 package reactSpringBoot.awsImageUpload.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,15 +13,16 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 @Configuration
 public class AmazonConfig {
 	
-<<<<<<< HEAD
+	@Value("${env.AWSAccessKeyId}")
+	String accesskeyId;
+	@Value("${env.AWSSecretKey}")
+	String secretkey;
+	
 	@Bean
 	public AmazonS3 s3() {
-=======
-	public void s3() {
->>>>>>> backend
 		AWSCredentials awsCredentials = new BasicAWSCredentials(
-					"","" 
-				); //accessKey,SecretKeys
+				accesskeyId,secretkey
+				);
 		return AmazonS3ClientBuilder
 					.standard()
 					.withCredentials(new AWSStaticCredentialsProvider(awsCredentials))

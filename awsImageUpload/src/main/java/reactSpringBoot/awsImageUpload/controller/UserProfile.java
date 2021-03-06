@@ -11,13 +11,9 @@ public class UserProfile {
 	
 	@Value("${env.EXAMPLE_NAME}")
 	String name;
-	@Value("${env.AWSAccessKeyId}")
-	String accesskeyId;
-	@Value("${env.AWSSecretKey}")
-	String secretkey;
 	
 	@GetMapping
 	public String getUserProfile() {
-		return name+" "+accesskeyId+" "+secretkey;
+		return name;
 	}
 }
