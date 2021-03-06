@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react"
+import UserProfiles from './components/UserProfiles';
 
 function App() {
   return (
     <div className="App">
-
+      <UserProfiles />
     </div>
   );
 }
