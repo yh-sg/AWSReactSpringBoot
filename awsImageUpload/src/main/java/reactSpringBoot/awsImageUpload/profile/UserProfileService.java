@@ -46,11 +46,7 @@ public class UserProfileService {
 			throw new IllegalStateException("File must be an image ->" + file.getContentType());
 		
 		//3. The user exist in database or not!
-		UsersProfile user = userProfileDataAccessService.getUsersProfiles()
-			.stream()
-			.filter(userProfile-> userProfile.getuserId().equals(userProfileId))
-			.findFirst()
-			.orElseThrow(()->new IllegalStateException(String.format("User profile %s is not found", userProfileId)));
+		UsersProfile user = getUserProfileOrThrow(userProfileId);
 		
 		//4.Grab some metadata from file if any
 		Map<String, String> metadata = new HashMap<>();
@@ -62,8 +58,29 @@ public class UserProfileService {
 		String filename = String.format("%s-%s", file.getOriginalFilename(), UUID.randomUUID());
 		try {
 			fileStore.save(path, filename, Optional.of(metadata), file.getInputStream());
+			user.setUserProfileImageLink(filename);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
+	public byte[] downloadUserProfileImage(UUID userProfileId) {
+		UsersProfile user = getUserProfileOrThrow(userProfileId);
+		String path = String.format("%s/%s", 
+				BucketName.PROFILE_IMAGE.getBucketName(), 
+				user.getuserId());
+		
+		return user.getUserProfileImageLink()
+			.map(key->fileStore.download(path, key))
+			.orElse(new byte[0]);
+	}
+	
+	private UsersProfile getUserProfileOrThrow(UUID userProfileId) {
+		return userProfileDataAccessService.getUsersProfiles()
+				.stream()
+				.filter(userProfile-> userProfile.getuserId().equals(userProfileId))
+				.findFirst()
+				.orElseThrow(()->new IllegalStateException(String.format("User profile %s is not found", userProfileId)));
+	}
+	
 }
