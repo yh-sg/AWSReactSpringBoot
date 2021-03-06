@@ -9,7 +9,7 @@ import com.amazonaws.services.s3.AmazonS3;
 @Configuration
 public class AmazonConfig {
 	
-	public AmazonS3 s3() {
+	public void s3() {
 		AWSCredentials awsCredentials = new BasicAWSCredentials(
 					"","" 
 				); //accessKey,SecretKeys
