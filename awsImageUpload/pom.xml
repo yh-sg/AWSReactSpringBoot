@@ -43,6 +43,11 @@
 		    <artifactId>aws-java-sdk</artifactId>
 		    <version>1.11.968</version>
 		</dependency>
+		<dependency>
+		  <groupId>me.paulschwarz</groupId>
+		  <artifactId>spring-dotenv</artifactId>
+		  <version>2.3.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

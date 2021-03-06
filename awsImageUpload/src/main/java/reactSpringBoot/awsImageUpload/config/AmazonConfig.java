@@ -12,8 +12,12 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 @Configuration
 public class AmazonConfig {
 	
+<<<<<<< HEAD
 	@Bean
 	public AmazonS3 s3() {
+=======
+	public void s3() {
+>>>>>>> backend
 		AWSCredentials awsCredentials = new BasicAWSCredentials(
 					"","" 
 				); //accessKey,SecretKeys

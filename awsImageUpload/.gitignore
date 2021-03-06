@@ -31,4 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 .env
+=======
+
+.env
+>>>>>>> backend
