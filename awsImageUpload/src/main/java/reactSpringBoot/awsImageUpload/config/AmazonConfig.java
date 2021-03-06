@@ -17,15 +17,18 @@ public class AmazonConfig {
 	String accesskeyId;
 	@Value("${env.AWSSecretKey}")
 	String secretkey;
-	
+	@Value("${env.AWSRegion}")
+	String region;
+
 	@Bean
 	public AmazonS3 s3() {
 		AWSCredentials awsCredentials = new BasicAWSCredentials(
-				accesskeyId,secretkey
-				);
+				accesskeyId,secretkey 
+				); //accessKey,SecretKeys
 		return AmazonS3ClientBuilder
 					.standard()
 					.withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
+					.withRegion(region)
 					.build();
 	}
 	
